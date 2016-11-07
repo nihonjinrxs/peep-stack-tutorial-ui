@@ -1,24 +1,33 @@
----
 language: node_js
 node_js:
-  - "4"
-
+- '4'
+env:
+  - CXX=g++-4.8
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
 sudo: false
-
 cache:
   directories:
-    - node_modules
-
+  - node_modules
 before_install:
-  - npm config set spin false
-  - npm install -g bower
-  - bower --version
-  - npm install phantomjs-prebuilt
-  - node_modules/phantomjs-prebuilt/bin/phantomjs --version
-
+- npm config set spin false
+- npm install -g bower
+- bower --version
+- npm install phantomjs-prebuilt
+- node_modules/phantomjs-prebuilt/bin/phantomjs --version
 install:
-  - npm install
-  - bower install
-
+- npm install
+- bower install
 script:
-  - npm test
+- npm test
+deploy:
+  provider: heroku
+  api_key:
+    secure: QkxeGpKh5qh1kW5G7+ZgS0GgDY6HQoo2INtuzI+b/lGy4qPMSjKVHRm1MPIs6PIahQdRL/55Iufxi92HB1J14qRNKLZ8oKsaSRbyAL5BzPKslzqYPyhAWJspcAWJQ9I9doqrisPo2QnhUpcHlRoxs3Xl7kNzls9gI/2v2FpbKCzqCSf+G/e69NuPwynDfhOQlJoxdEDkgFQYZbN13+cX8SiCHULOH+gQXoEX1yir7EjSNjNhBD42F8f/LfeAWPTgbws3THk7DH2NRtRV0cG7BxpNsbOwPy5MfHw0stmtTMUqEHqjyjk/I6nukRlqdMi2sUDBbO2AveFzsK69Wy1JDR7jjWdnngcDVd3jLVx0yk/dlIpOOGf9s9T39RIY/3Y9CrWW5aiv27MioAUTcl19SRqRcdATfB/nTT43Lma9eMP9NaHoOMSz870gWRyaIghRNMBjROUjGIBemyMNSXPWuemfdwrZDPL+Idk90o16lLGrn4yD03NOf97m5zVZjH1N1vA2box5BQJ+X3a9kAjRzZQdP1X8sqG/C642Hoeew7R2ABe2hxk3rtFOhfvmUfXQxRH7SnpJvAZc3MtVP5FQfWBcKrwkROB3vOqVWJ7Wbdzi/SMnchPfYV5olyUQJxG170KNNy/272M+lZ+EtxzMJ7Ia+YEgSiSHQ565GTuoCQ0=
+  app: desolate-sierra-33896
+  on:
+    repo: nihonjinrxs/peep-stack-tutorial-ui
